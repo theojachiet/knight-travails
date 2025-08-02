@@ -17,4 +17,42 @@ function findEdges(departure) {
     return destinations;
 }
 
+let visited = [[0, 0], [1, 2]];
+let toVisit = [[3, 2], [0, 0]];
+
+console.log(eliminateDuplicates(visited, toVisit));
+
+function eliminateDuplicates(visited, toVisit) {
+    return toVisit.filter(([x, y]) => 
+        !visited.some(([vx, vy]) => vx === x && vy === y)
+    );
+}
+
+function findDestination(departure, destination) {
+    let queue = [];
+    let visited = [];
+    let steps = 0;
+    queue.push(departure);
+
+    while(queue.length > 0) {
+        let current = queue[0];
+        steps++;
+
+        //Find all possible paths and relive duplicates
+        let toVisit = findEdges(current);
+        toVisit = eliminateDuplicates(visited, toVisit);
+
+        //Check if the destination is encountered
+        if (toVisit.some(([x, y]) => x === destination[0] && y === destination[1])) {
+            return `Destination found in ${steps} steps`;
+        }
+
+        //Update queue and visited arrays
+        visited.concat(toVisit);
+        queue.concat(toVisit);
+
+        queue.shift();
+    }
+}
+
 console.log(findEdges([0, 0]));
