@@ -17,11 +17,6 @@ function findEdges(departure) {
     return destinations;
 }
 
-let visited = [[0, 0], [1, 2]];
-let toVisit = [[3, 2], [0, 0]];
-
-console.log(eliminateDuplicates(visited, toVisit));
-
 function eliminateDuplicates(visited, toVisit) {
     return toVisit.filter(([x, y]) => 
         !visited.some(([vx, vy]) => vx === x && vy === y)
@@ -48,11 +43,11 @@ function findDestination(departure, destination) {
         }
 
         //Update queue and visited arrays
-        visited.concat(toVisit);
-        queue.concat(toVisit);
+        visited = visited.concat(toVisit);
+        queue = queue.concat(toVisit);
 
         queue.shift();
     }
 }
 
-console.log(findEdges([0, 0]));
+console.log(findDestination([3, 3], [4, 3]));
