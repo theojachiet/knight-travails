@@ -1,20 +1,16 @@
 import { Graph } from "./graph.js";
 
+//Generates an array of possible destination on the board given a departure coordinates
 function findEdges([x, y]) {
     const moves = [
         [1, 2], [-1, 2], [1, -2], [-1, -2],
         [2, 1], [-2, 1], [2, -1], [-2, -1],
     ];
 
+    //Ensure the moves are legal (inside the board)
     return moves
         .map(([dx, dy]) => [x + dx, y + dy])
         .filter(([nx, ny]) => nx >= 0 && nx < 8 && ny >= 0 && ny < 8);
-}
-
-function eliminateDuplicates(visited, toVisit) {
-    return toVisit.filter(([x, y]) =>
-        !visited.some(([vx, vy]) => vx === x && vy === y)
-    );
 }
 
 function findDestination(departure, destination) {
@@ -47,10 +43,14 @@ function findDestination(departure, destination) {
         const currentStr = positionToString(current);
 
         //Exit the loop when we find the destination
-        if (currentStr === positionToString(destination)) break;
+        if (current === destination) break;
 
         for (const neighbour of findEdges(current)) {
             const neighbourStr = positionToString(neighbour);
+            //If a neighbour has not been visited : 
+            // add it to visited 
+            // add it to the previous map with it's previous vertex (current)
+            // push it to the queue
             if (!visited.has(neighbourStr)) {
                 visited.add(neighbourStr);
                 prev.set(neighbourStr, currentStr);
@@ -81,8 +81,9 @@ function findDestination(departure, destination) {
 
 function displayPath(source, target) {
     const path = findDestination(source, target);
-    console.log(`Path found in ${path.length - 1} step(s) !`);
+    const steps = path.length - 1;
+    console.log(`Path found in ${path.length === 2 ? '1 step' : steps + ' steps'} !`);
     path.forEach(p => console.log(p));
 }
 
-displayPath([0, 0], [7, 7]);
+displayPath([3, 3], [4, 3]);
