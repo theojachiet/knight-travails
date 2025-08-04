@@ -25,6 +25,7 @@ function findDestination(departure, destination) {
     //Using a set for the visited vertices
     let visited = new Set();
 
+    //Utility functions to convert from string to pos and vice versa
     function positionToString(pos) {
         return `${pos[0]},${pos[1]}`;
     }
@@ -79,6 +80,7 @@ function findDestination(departure, destination) {
     return path;
 }
 
+//Format the path and display the number of steps in the console.
 function displayPath(source, target) {
     const path = findDestination(source, target);
     const steps = path.length - 1;
