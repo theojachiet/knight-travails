@@ -1,0 +1,21 @@
+{
+  "name": "knight-travails",
+  "version": "1.0.0",
+  "description": "Finding the shortest path for a knight using graphs",
+  "main": "graph.js",
+  "type" : "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theojachiet/knight-travails.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theojachiet/knight-travails/issues"
+  },
+  "homepage": "https://github.com/theojachiet/knight-travails#readme"
+}
